@@ -1,6 +1,6 @@
 {
   "name": "@arraypress/waveform-bar-react",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "React components for @arraypress/waveform-bar — singleton mount with config-as-props and polymorphic play/queue trigger.",
   "type": "module",
   "main": "./dist/index.cjs",
