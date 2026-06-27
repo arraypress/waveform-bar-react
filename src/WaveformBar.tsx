@@ -134,8 +134,8 @@ export function WaveformBar(props: WaveformBarProps) {
 					null;
 
 				if (!WaveformBarGlobal) {
-					console.error(
-						'[waveform-bar-react] window.WaveformBar is undefined after import. ' +
+					console.warn(
+						'[WaveformBarReact] window.WaveformBar is undefined after import. ' +
 						'Make sure @arraypress/waveform-player is loaded BEFORE @arraypress/waveform-bar.'
 					);
 					return;
@@ -144,7 +144,7 @@ export function WaveformBar(props: WaveformBarProps) {
 				try {
 					WaveformBarGlobal.init(config);
 				} catch (err) {
-					console.error('[waveform-bar-react] init failed:', err);
+					console.error('[WaveformBarReact] init() failed:', err);
 					return;
 				}
 
@@ -161,7 +161,7 @@ export function WaveformBar(props: WaveformBarProps) {
 				}
 			})
 			.catch((err) => {
-				console.error('[waveform-bar-react] Failed to load library:', err);
+				console.error('[WaveformBarReact] Failed to load core library:', err);
 			});
 
 		return () => {
@@ -176,7 +176,7 @@ export function WaveformBar(props: WaveformBarProps) {
 			try {
 				WaveformBarGlobal?.destroy?.();
 			} catch (err) {
-				console.warn('[waveform-bar-react] destroy() threw:', err);
+				console.warn('[WaveformBarReact] destroy() threw during cleanup:', err);
 			}
 			mod = null;
 		};

@@ -151,18 +151,18 @@ describe('<WaveformBar> — lifecycle', () => {
 });
 
 describe('<WaveformBar> — missing global', () => {
-	it('logs an error but does not throw when window.WaveformBar is undefined', async () => {
+	it('warns but does not throw when window.WaveformBar is undefined', async () => {
 		// Remove the global the test fixture installed
 		delete (window as unknown as Record<string, unknown>).WaveformBar;
-		const errSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+		const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
 		expect(() => render(<WaveformBar />)).not.toThrow();
 		// Wait for the dynamic import to resolve
 		await new Promise<void>((resolve) => setTimeout(resolve, 30));
 
-		expect(errSpy).toHaveBeenCalled();
-		expect(errSpy.mock.calls[0]?.[0]).toMatch(/window\.WaveformBar is undefined/);
+		expect(warnSpy).toHaveBeenCalled();
+		expect(warnSpy.mock.calls[0]?.[0]).toMatch(/window\.WaveformBar is undefined/);
 
-		errSpy.mockRestore();
+		warnSpy.mockRestore();
 	});
 });
