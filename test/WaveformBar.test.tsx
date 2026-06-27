@@ -113,6 +113,27 @@ describe('<WaveformBar> — lifecycle', () => {
 		expect(initCalls[0]).toEqual(config);
 	});
 
+	it('passes the 1.4.0 config options through to init()', async () => {
+		const config: WaveformBarConfig = {
+			wide: true,
+			maxWidth: '1200px',
+			position: 'top',
+			collapsible: true,
+			waveform: false,
+			share: true,
+			shareParam: 'wt',
+			errorText: 'Audio failed to load',
+		};
+		render(<WaveformBar config={config} />);
+		await waitFor(() => expect(initCalls).toHaveLength(1));
+		expect(initCalls[0]).toEqual(config);
+
+		// A representative couple of the new options reach the bar config.
+		const received = initCalls[0] as WaveformBarConfig;
+		expect(received.share).toBe(true);
+		expect(received.position).toBe('top');
+	});
+
 	it('passes an empty / undefined config without throwing', async () => {
 		render(<WaveformBar />);
 		await waitFor(() => expect(initCalls).toHaveLength(1));

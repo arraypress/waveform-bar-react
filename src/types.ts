@@ -117,10 +117,16 @@ export interface WaveformBarConfig {
 	showTrackLink?: boolean;
 	showMeta?: boolean;
 	maxMeta?: number;
+	// ── Layout + docking ───────────────────────────────────────────────
+	wide?: boolean;
+	maxWidth?: string | null;
+	position?: 'bottom' | 'top';
+	collapsible?: boolean;
 	// ── Defaults + theming ─────────────────────────────────────────────
 	defaultArtwork?: string | null;
 	theme?: WaveformBarTheme;
 	// ── Waveform visualisation ─────────────────────────────────────────
+	waveform?: boolean;
 	waveformStyle?: WaveformStyle;
 	waveformHeight?: number;
 	barWidth?: number;
@@ -128,6 +134,10 @@ export interface WaveformBarConfig {
 	waveformColor?: string | null;
 	progressColor?: string | null;
 	markerColor?: string;
+	// ── Sharing + errors ───────────────────────────────────────────────
+	share?: boolean;
+	shareParam?: string;
+	errorText?: string | null;
 	// ── Volume + persistence keys ──────────────────────────────────────
 	volume?: number;
 	storageKey?: string;

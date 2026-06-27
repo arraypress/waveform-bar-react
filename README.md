@@ -209,14 +209,26 @@ Every field optional — the library has sensible defaults. See [`src/types.ts`]
   showTime, showTrackLink, showMeta: boolean;
   maxMeta: number;
 
+  // Layout + docking
+  wide: boolean;              // default false — span full width (lifts the 1400px cap)
+  maxWidth: string | null;    // custom content max-width, e.g. '1200px' (overrides wide)
+  position: 'bottom' | 'top'; // default 'bottom' — which edge the bar docks to
+  collapsible: boolean;       // default false — collapse to a floating transport pill
+
   // Theming
   theme: 'dark' | 'light' | null;
   defaultArtwork: string;
 
   // Waveform visualisation
+  waveform: boolean;          // default true — false = classic Spotify-style seek bar
   waveformStyle: 'bars' | 'mirror' | 'line' | 'blocks' | 'dots' | 'seekbar';
   waveformHeight, barWidth, barSpacing: number;
   waveformColor, progressColor, markerColor: string;
+
+  // Sharing + errors
+  share: boolean;             // default false — show a "copy share link" button
+  shareParam: string;         // default 'wt' — URL query param for the shared timestamp
+  errorText: string | null;   // custom "audio failed to load" message
 
   // Volume + persistence keys
   volume: number;
@@ -287,7 +299,7 @@ npm run typecheck
 npm run build     # emit dist/index.js, dist/index.cjs, dist/index.d.ts
 ```
 
-46 tests cover `<WaveformBarTrigger>` rendering + attribute mapping (no module mocking needed) and `<WaveformBar>` lifecycle (window global mocked since jsdom has no Web Audio).
+53 tests cover `<WaveformBarTrigger>` rendering + attribute mapping (no module mocking needed) and `<WaveformBar>` lifecycle (window global mocked since jsdom has no Web Audio).
 
 ## License
 
