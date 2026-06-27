@@ -36,7 +36,8 @@
  *
  * @module WaveformBarTrigger
  */
-import type { CSSProperties, ReactNode } from 'react';
+import { forwardRef } from 'react';
+import type { CSSProperties, HTMLAttributes, ReactNode, Ref } from 'react';
 import type { WaveformBarTriggerProps } from './types';
 
 /**
@@ -115,7 +116,8 @@ function toAttr(value: unknown): string | undefined {
  *     Play mix
  *   </WaveformBarTrigger>
  */
-export function WaveformBarTrigger(props: WaveformBarTriggerProps) {
+export const WaveformBarTrigger = forwardRef<HTMLElement, WaveformBarTriggerProps>(
+	function WaveformBarTrigger(props, ref) {
 	const {
 		mode = 'play',
 		as = 'button',
@@ -176,7 +178,7 @@ export function WaveformBarTrigger(props: WaveformBarTriggerProps) {
 	 * the pattern used across the reference theme.
 	 */
 	const ariaLabel =
-		(rest as { 'aria-label'?: string })['aria-label'] ??
+		rest['aria-label'] ??
 		(mode === 'queue'
 			? title
 				? `Add ${title} to queue`
@@ -200,28 +202,52 @@ export function WaveformBarTrigger(props: WaveformBarTriggerProps) {
 	 * clean for each tag's prop set.
 	 */
 	const commonProps = {
+		/* Standard DOM props the consumer passed (onClick, data-testid,
+		 * role, tabIndex, event handlers, …) are spread FIRST so the
+		 * component's own required attributes below always win. `aria-label`
+		 * is left in `rest`, but the explicit `'aria-label'` below resolves
+		 * to the same value (or the auto-generated fallback). */
+		...rest,
 		...dataAttrs,
 		className: mergedClass,
 		style: style as CSSProperties | undefined,
 		'aria-label': ariaLabel,
 	};
 
+	/* The public props are modelled on `<button>`, so the spread
+	 * object's event handlers are typed for `HTMLButtonElement`. The
+	 * non-button branches render identical runtime attributes, but the
+	 * handler generics don't line up against an anchor / div / span —
+	 * widen to the shared `HTMLElement` base so the spread type-checks. */
+	const polymorphicProps = commonProps as unknown as HTMLAttributes<HTMLElement>;
+
 	if (as === 'a') {
 		return (
-			<a href={href} {...commonProps}>
+			<a ref={ref as Ref<HTMLAnchorElement>} href={href} {...polymorphicProps}>
 				{content}
 			</a>
 		);
 	}
 	if (as === 'div') {
-		return <div {...commonProps}>{content}</div>;
+		return (
+			<div ref={ref as Ref<HTMLDivElement>} {...polymorphicProps}>
+				{content}
+			</div>
+		);
 	}
 	if (as === 'span') {
-		return <span {...commonProps}>{content}</span>;
+		return (
+			<span ref={ref as Ref<HTMLSpanElement>} {...polymorphicProps}>
+				{content}
+			</span>
+		);
 	}
 	return (
-		<button type="button" {...commonProps}>
+		<button ref={ref as Ref<HTMLButtonElement>} type="button" {...commonProps}>
 			{content}
 		</button>
 	);
 }
+);
+
+WaveformBarTrigger.displayName = 'WaveformBarTrigger';

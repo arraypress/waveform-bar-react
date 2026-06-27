@@ -6,8 +6,9 @@
  * the component is a pure renderer that emits `data-wb-*`
  * attributes and stops there. We assert on the rendered HTML.
  */
-import { describe, it, expect, beforeEach } from 'vitest';
-import { render, cleanup } from '@testing-library/react';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { createRef } from 'react';
+import { render, cleanup, fireEvent } from '@testing-library/react';
 import { WaveformBarTrigger } from '../src/WaveformBarTrigger';
 
 beforeEach(cleanup);
@@ -254,6 +255,50 @@ describe('<WaveformBarTrigger> — class merging', () => {
 		const className = container.querySelector('button')!.className;
 		expect(className).toContain('wb-icon-swap');
 		expect(className).toContain('card-play-btn');
+	});
+});
+
+describe('<WaveformBarTrigger> — standard DOM props + ref', () => {
+	it('forwards onClick to the rendered element', () => {
+		const onClick = vi.fn();
+		const { container } = render(<WaveformBarTrigger url="/a.mp3" onClick={onClick} />);
+		fireEvent.click(container.querySelector('button')!);
+		expect(onClick).toHaveBeenCalledTimes(1);
+	});
+
+	it('passes through data-* attributes (e.g. data-testid)', () => {
+		const { container } = render(
+			<WaveformBarTrigger url="/a.mp3" data-testid="play-btn" />
+		);
+		expect(container.querySelector('button')!.getAttribute('data-testid')).toBe('play-btn');
+	});
+
+	it('passes through role and tabIndex', () => {
+		const { container } = render(
+			<WaveformBarTrigger url="/a.mp3" as="div" role="button" tabIndex={0} />
+		);
+		const el = container.querySelector('div')!;
+		expect(el.getAttribute('role')).toBe('button');
+		expect(el.getAttribute('tabindex')).toBe('0');
+	});
+
+	it('forwards a ref to the underlying button element', () => {
+		const ref = createRef<HTMLElement>();
+		render(<WaveformBarTrigger ref={ref} url="/a.mp3" />);
+		expect(ref.current).toBeInstanceOf(HTMLButtonElement);
+	});
+
+	it('forwards a ref to the underlying anchor element when as="a"', () => {
+		const ref = createRef<HTMLElement>();
+		render(<WaveformBarTrigger ref={ref} as="a" href="/foo" url="/a.mp3" />);
+		expect(ref.current).toBeInstanceOf(HTMLAnchorElement);
+	});
+
+	it('does not let consumer props clobber the data-wb-* contract', () => {
+		const { container } = render(
+			<WaveformBarTrigger url="/real.mp3" data-wb-url="/spoofed.mp3" />
+		);
+		expect(container.querySelector('button')!.getAttribute('data-wb-url')).toBe('/real.mp3');
 	});
 });
 

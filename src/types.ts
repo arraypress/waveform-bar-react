@@ -29,7 +29,7 @@
  * @see {@link https://github.com/arraypress/waveform-bar} — core library
  */
 
-import type { ReactNode, CSSProperties } from 'react';
+import type { ReactNode, CSSProperties, ComponentPropsWithoutRef } from 'react';
 
 /* Re-export the WaveformStyle alias for ergonomic consumer imports. */
 export type { WaveformStyle } from './waveform-style';
@@ -203,8 +203,24 @@ export interface WaveformBarTrackData {
  * The component is polymorphic via the `as` prop — defaults to
  * `<button>` because that gives keyboard focus + Space/Enter
  * activation for free.
+ *
+ * Extends `ComponentPropsWithoutRef<'button'>` so every standard DOM
+ * prop a `<button>` accepts — `onClick`, `data-*` (e.g. `data-testid`),
+ * `role`, `tabIndex`, `disabled`, event handlers, etc. — passes
+ * straight through to the rendered element (the component spreads the
+ * leftover `...rest` onto it). The component is also `forwardRef`-wrapped,
+ * so `ref` reaches the underlying element. The track-data props above
+ * still win where names overlap (the component applies its own
+ * `data-wb-*` contract last).
+ *
+ * Note: the standard-prop types are modelled on `<button>` (the default
+ * tag). When rendering `as="a"`, anchor-only props like `target` / `rel`
+ * aren't in the type set — pass `href` (a first-class prop) and any
+ * extra anchor attributes will still be spread through at runtime.
  */
-export interface WaveformBarTriggerProps extends WaveformBarTrackData {
+export interface WaveformBarTriggerProps
+	extends WaveformBarTrackData,
+		ComponentPropsWithoutRef<'button'> {
 	/**
 	 * Whether clicking plays the track (`'play'`) or just appends
 	 * to the queue (`'queue'`).
