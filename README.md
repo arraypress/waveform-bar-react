@@ -210,17 +210,19 @@ Every field optional — the library has sensible defaults. See [`src/types.ts`]
   maxMeta: number;
 
   // Layout + docking
-  wide: boolean;              // default false — span full width (lifts the 1400px cap)
-  maxWidth: string | null;    // custom content max-width, e.g. '1200px' (overrides wide)
+  mode: 'waveform' | 'classic'; // default 'waveform' — 'classic' = Spotify-style centre layout + seek bar
+  wide: boolean;              // default false — waveform mode only: span full width (lifts the 1400px cap)
   position: 'bottom' | 'top'; // default 'bottom' — which edge the bar docks to
   collapsible: boolean;       // default false — collapse to a floating transport pill
+  showShuffle: boolean;       // default false — show a shuffle toggle in the transport cluster
+  shuffle: boolean;           // default false — start with shuffle (random queue advance) on
 
   // Theming
   theme: 'dark' | 'light' | null;
   defaultArtwork: string;
 
   // Waveform visualisation
-  waveform: boolean;          // default true — false = classic Spotify-style seek bar
+  waveform: boolean;          // default true — managed by mode ('classic' sets this false)
   waveformStyle: 'bars' | 'mirror' | 'line' | 'blocks' | 'dots' | 'seekbar';
   waveformHeight, barWidth, barSpacing: number;
   waveformColor, progressColor, markerColor: string;

@@ -116,7 +116,7 @@ describe('<WaveformBar> — lifecycle', () => {
 	it('passes the 1.4.0 config options through to init()', async () => {
 		const config: WaveformBarConfig = {
 			wide: true,
-			maxWidth: '1200px',
+			mode: 'classic',
 			position: 'top',
 			collapsible: true,
 			waveform: false,

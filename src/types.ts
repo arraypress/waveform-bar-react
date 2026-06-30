@@ -119,9 +119,14 @@ export interface WaveformBarConfig {
 	maxMeta?: number;
 	// ── Layout + docking ───────────────────────────────────────────────
 	wide?: boolean;
-	maxWidth?: string | null;
 	position?: 'bottom' | 'top';
 	collapsible?: boolean;
+	/** Display mode: `'waveform'` (default layout + waveform, width-adjustable) or `'classic'` (Spotify-style centre layout + seekbar, full-width). @default 'waveform' */
+	mode?: 'waveform' | 'classic';
+	/** Show a shuffle toggle button in the transport cluster. @default false */
+	showShuffle?: boolean;
+	/** Start with shuffle (random queue advance) on. @default false */
+	shuffle?: boolean;
 	// ── Defaults + theming ─────────────────────────────────────────────
 	defaultArtwork?: string | null;
 	theme?: WaveformBarTheme;
