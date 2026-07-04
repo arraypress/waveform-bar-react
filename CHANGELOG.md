@@ -5,6 +5,16 @@ All notable changes to `@arraypress/waveform-bar-react` are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
+## [0.3.0] — 2026-07-05
+
+### Added
+
+- Accept the new localizable player-string keys — `seekValueText`,
+  `playPauseLabel`, `speedLabel`, `artworkAlt`, and `unknownTrackText` — in
+  the bar config; they are forwarded to the embedded player. Requires
+  `@arraypress/waveform-bar@^1.10.0`.
+
 ## [0.2.0] — 2026-07-01
 
 ### Changed
