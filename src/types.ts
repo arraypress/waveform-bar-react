@@ -143,6 +143,17 @@ export interface WaveformBarConfig {
 	share?: boolean;
 	shareParam?: string;
 	errorText?: string | null;
+	// ── Localizable player strings (forwarded to the embedded player) ──
+	/** Seek slider spoken `aria-valuetext` template — `%1$s` current, `%2$s` total. */
+	seekValueText?: string | null;
+	/** Media Session title fallback when a track has no title. */
+	unknownTrackText?: string | null;
+	/** Play button `aria-label`. Governs player UI the bar hides; forwarded for completeness. */
+	playPauseLabel?: string | null;
+	/** Speed control `aria-label`. Hidden UI; forwarded for completeness. */
+	speedLabel?: string | null;
+	/** Artwork image alt text. Hidden UI; forwarded for completeness. */
+	artworkAlt?: string | null;
 	// ── Volume + persistence keys ──────────────────────────────────────
 	volume?: number;
 	storageKey?: string;
