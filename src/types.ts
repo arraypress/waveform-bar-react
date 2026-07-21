@@ -143,6 +143,8 @@ export interface WaveformBarConfig {
 	share?: boolean;
 	shareParam?: string;
 	errorText?: string | null;
+	/** CORS mode for the embedded `<audio>`. Unset by default (native `<audio>` behavior; avoids breaking CDN media without CORS headers). @default null */
+	crossOrigin?: 'anonymous' | 'use-credentials' | null;
 	// ── Localizable player strings (forwarded to the embedded player) ──
 	/** Seek slider spoken `aria-valuetext` template — `%1$s` current, `%2$s` total. */
 	seekValueText?: string | null;

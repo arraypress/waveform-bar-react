@@ -123,6 +123,7 @@ describe('<WaveformBar> — lifecycle', () => {
 			share: true,
 			shareParam: 'wt',
 			errorText: 'Audio failed to load',
+			crossOrigin: 'anonymous',
 		};
 		render(<WaveformBar config={config} />);
 		await waitFor(() => expect(initCalls).toHaveLength(1));
@@ -132,6 +133,7 @@ describe('<WaveformBar> — lifecycle', () => {
 		const received = initCalls[0] as WaveformBarConfig;
 		expect(received.share).toBe(true);
 		expect(received.position).toBe('top');
+		expect(received.crossOrigin).toBe('anonymous');
 	});
 
 	it('passes an empty / undefined config without throwing', async () => {
