@@ -18,6 +18,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `0` = square, `null` = the player's default. Requires
   `@arraypress/waveform-bar` 1.12.0+; older bars ignore it.
 
+### Changed
+
+- **Peer floors raised:** `@arraypress/waveform-bar` `^1.10.0` → `^1.11.0`
+  and `@arraypress/waveform-player` `^1.7.2` → `^1.8.0`. `WaveformBarConfig`
+  has declared `crossOrigin` since 0.4.0, but the bar only accepts it from
+  1.11.0; and the bar drives `audioMode: 'external'` inline players, which
+  crashed before core player 1.8.0. The optional `barRadius` / working
+  `showTime` (bar 1.12.0) don't raise the floor — older bars ignore them.
+
 ### Fixed
 
 - **`waveformColor` / `progressColor` accept gradient stop arrays.** They

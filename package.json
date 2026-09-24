@@ -56,8 +56,8 @@
   },
   "sideEffects": false,
   "peerDependencies": {
-    "@arraypress/waveform-bar": "^1.10.0",
-    "@arraypress/waveform-player": "^1.7.2",
+    "@arraypress/waveform-bar": "^1.11.0",
+    "@arraypress/waveform-player": "^1.8.0",
     "react": "^18.0.0 || ^19.0.0"
   },
   "scripts": {
@@ -69,8 +69,8 @@
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
-    "@arraypress/waveform-bar": "^1.10.0",
-    "@arraypress/waveform-player": "^1.7.2",
+    "@arraypress/waveform-bar": "^1.11.0",
+    "@arraypress/waveform-player": "^1.8.0",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@types/react": "^19.2.17",
