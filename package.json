@@ -1,6 +1,6 @@
 {
   "name": "@arraypress/waveform-bar-react",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "React components for @arraypress/waveform-bar — singleton mount with config-as-props and polymorphic play/queue trigger.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -69,8 +69,8 @@
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
-    "@arraypress/waveform-bar": "^1.11.0",
-    "@arraypress/waveform-player": "^1.8.0",
+    "@arraypress/waveform-bar": "^1.12.0",
+    "@arraypress/waveform-player": "^1.28.0",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@types/react": "^19.2.17",
