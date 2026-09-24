@@ -6,6 +6,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [Unreleased]
+
+### Added
+
+- **`waveformGradient` config key** (`'vertical' | 'horizontal' |
+  'diagonal'`). The bar has forwarded it to the embedded player since 1.8.0,
+  but it was missing from `WaveformBarConfig`, so TypeScript rejected a
+  working option.
+- **`barRadius` config key** (`number | null`) — rounded bar caps in px,
+  `0` = square, `null` = the player's default. Requires
+  `@arraypress/waveform-bar` 1.12.0+; older bars ignore it.
+
+### Fixed
+
+- **`waveformColor` / `progressColor` accept gradient stop arrays.** They
+  were typed `string | null`, but the bar forwards them verbatim to a player
+  that takes `string | string[] | null` — `['#fafafa', '#71717a']` works at
+  runtime and now typechecks.
+- **`showTime` doc comment** notes that `false` actually hides the time
+  display from `@arraypress/waveform-bar` 1.12.0 (earlier bars ignored it).
+
 ## [0.4.0] — 2026-07-22
 
 ### Added

@@ -136,6 +136,23 @@ describe('<WaveformBar> — lifecycle', () => {
 		expect(received.crossOrigin).toBe('anonymous');
 	});
 
+	it('passes waveformGradient, gradient colour stops, barRadius and showTime through to init()', async () => {
+		// Typed as WaveformBarConfig on purpose: this literal is the type
+		// test — `tsc` rejected every one of these keys/values before.
+		const config: WaveformBarConfig = {
+			waveformGradient: 'horizontal',
+			waveformColor: ['#fafafa', '#71717a'],
+			progressColor: ['#22d3ee', '#0e7490'],
+			barRadius: 0,
+			showTime: false,
+		};
+		render(<WaveformBar config={config} />);
+		await waitFor(() => expect(initCalls).toHaveLength(1));
+		expect(initCalls[0]).toEqual(config);
+		// 0 is a real value (square caps), not "unset" — it must survive.
+		expect((initCalls[0] as WaveformBarConfig).barRadius).toBe(0);
+	});
+
 	it('passes an empty / undefined config without throwing', async () => {
 		render(<WaveformBar />);
 		await waitFor(() => expect(initCalls).toHaveLength(1));

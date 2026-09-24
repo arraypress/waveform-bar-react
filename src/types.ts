@@ -113,6 +113,7 @@ export interface WaveformBarConfig {
 	showRepeat?: boolean;
 	showVolume?: boolean;
 	showMute?: boolean;
+	/** Show the current / total time readout. `false` hides it (waveform-bar 1.12.0+; older bars ignored this and always showed it). @default true */
 	showTime?: boolean;
 	showTrackLink?: boolean;
 	showMeta?: boolean;
@@ -136,8 +137,14 @@ export interface WaveformBarConfig {
 	waveformHeight?: number;
 	barWidth?: number;
 	barSpacing?: number;
-	waveformColor?: string | null;
-	progressColor?: string | null;
+	/** Rounded bar-cap radius in px (`0` = square). `null` = the player's default. Requires waveform-bar 1.12.0+ (older bars ignore it). @default null */
+	barRadius?: number | null;
+	/** Unplayed waveform colour — a CSS colour, or an array of colour stops for a gradient (e.g. `['#fafafa', '#71717a']`). `null` = theme default. */
+	waveformColor?: string | string[] | null;
+	/** Played-through colour. Also accepts an array of colour stops for a gradient. `null` = theme default. */
+	progressColor?: string | string[] | null;
+	/** Gradient axis when `waveformColor` / `progressColor` is an array of stops. @default 'vertical' */
+	waveformGradient?: 'vertical' | 'horizontal' | 'diagonal';
 	markerColor?: string;
 	// ── Sharing + errors ───────────────────────────────────────────────
 	share?: boolean;
