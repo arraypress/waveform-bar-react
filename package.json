@@ -37,10 +37,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/arraypress/waveform-bar-react.git"
+    "url": "git+https://github.com/WaveformPlayer/waveform-bar-react.git"
   },
   "bugs": {
-    "url": "https://github.com/arraypress/waveform-bar-react/issues"
+    "url": "https://github.com/WaveformPlayer/waveform-bar-react/issues"
   },
   "homepage": "https://waveformplayer.com",
   "funding": {

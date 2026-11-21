@@ -26,7 +26,7 @@
  * in your own effect — that's framework-agnostic and avoids the
  * re-init churn.
  *
- * @see {@link https://github.com/arraypress/waveform-bar} — core library
+ * @see {@link https://github.com/WaveformPlayer/waveform-bar} — core library
  */
 
 import type { ReactNode, CSSProperties, ComponentPropsWithoutRef } from 'react';
