@@ -1,3 +1,7 @@
+> [!IMPORTANT]
+> **Replaced by [`@arraypress/waveform-react`](https://www.npmjs.com/package/@arraypress/waveform-react) 2.0.** Import from `@arraypress/waveform-react/bar` instead — one package per framework, with a sub-path per component ([repo](https://github.com/WaveformPlayer/react), [migration guide](https://docs.waveformplayer.com/getting-started/migrating-from-1x/)).
+> This repository is archived and the npm package is deprecated; its 1.x releases keep working.
+
 <div align="center">
 
 # Waveform Bar for React
